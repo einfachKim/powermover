@@ -48,25 +48,33 @@ Below is a comprehensive table outlining the components included in the solution
 
 ## Prerequisites
 - **Power Apps Premium License**: Required to use this solution since it involves accessing different Dataverse tables.
-- **Environment Admin Permissions**: Necessary for managing solution transfers at an environment level.
-- **Owner Permissions**: Ensure that the current owner has the appropriate permissions to delegate ownership.
+- **Owner Permissions**: The user using the apps needs to own components he wants to transfer or must be at least system customizer or system administrator to transfer components owned by other users.
 
 ## Installation Guide
 1. **Import the solution** in the environment where you want to manage ownerships (recommended: DEV Environment).
 2. **Activate all Cloud Flows** in the solution to ensure smooth operation.
 3. **Run the Canvas App** named `Power Mover` to start using the solution.
-   
-> **Note**: After importing and configuring the solution, verify the connections to Dataverse and ensure that all required environment variables are properly defined.
 
-## Configuration Details
-After installation, ensure that the necessary permissions are granted to all users who need access to the solution components. Check that all flows have appropriate owners and permissions to execute.
 
 ## Usage Instructions
-To transfer components:
+To transfer a single component:
 1. Open the **Power Mover** Canvas App.
-2. Select the components you want to transfer (Canvas Apps, Cloud Flows, Connection References, Environment Variables).
+2. Select the component you want to transfer using the pen-icon (Canvas Apps, Cloud Flows, Connection References, Environment Variables).
 3. Click on the "Transfer" button and choose the new owner.
-4. Monitor the status of each transfer using the app interface.
+4. For Power Apps Canvas Apps: Select if the current owner shall be co-owner after the transfer
+5. Monitor the status of the selected component in the app interface.
+6. Expected Result: Owner of the component has changed
+
+
+To transfer a multiple component:
+1. Open the **Power Mover** Canvas App.
+2. Use the checkboxes to select multiple components that you want to transfer (Canvas Apps, Cloud Flows, Connection References, Environment Variables).
+3. Use the bulk select checkbox at the left top of each table to select all components currently shown in the table
+4. At the bottom of the table you can empty the basket with components, see the total items count of components or click "Transfer Components" to move on transferring all selected components.
+5. For Power Apps Canvas Apps: Select if the current owner shall be co-owner after the transfer
+6. Click on the "Transfer" button and choose the new owner.
+7. Monitor the status of each transfer using the app interface.
+8. Expected Result: Owner of all components that you have selected has changed
 
 ## Demo Video
 For a detailed walkthrough of the solution and a demo of the transfer process, check out our [YouTube Demo Video](https://www.youtube.com/watch?v=YOUR_VIDEO_LINK).
@@ -90,15 +98,9 @@ For any questions, feedback, or issues, feel free to reach out:
 - **Email**: [kim@ema-sh.de](mailto:kim@ema-sh.de)
 - **LinkedIn**: [Kim Buske on LinkedIn](https://www.linkedin.com/in/kim-buske/)
 
-## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Contributing
-We welcome contributions! Please read the [contributing guidelines](CONTRIBUTING.md) and submit a pull request with a clear description of your changes. Make sure to run tests and adhere to our coding standards.
-
 ## Frequently Asked Questions (FAQ)
-- **Q: Can I transfer components across environments?**  
-  A: No, the current version supports ownership transfers within the same environment only.
+- **Q: Can I transfer components to multiple owners?**  
+  A: No, the current version supports ownership transfers to one new owner
   
-- **Q: What if I encounter a permission issue?**  
-  A: Make sure you have the necessary roles and permissions for the Dataverse tables involved.
+- **Q: Can I see components of multiple environments?  
+  A: No, the current version only displays all components from the current environment (where the solution is installed)
