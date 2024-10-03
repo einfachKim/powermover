@@ -58,6 +58,7 @@ Below is a comprehensive table outlining the components included in the solution
 
 ## Usage Instructions
 To transfer a single component:
+![til](https://i.imgur.com/A7iwJcP.gif)
 1. Open the **Power Mover** Canvas App.
 2. Select the component you want to transfer using the pen-icon (Canvas Apps, Cloud Flows, Connection References, Environment Variables).
 3. Click on the "Transfer" button and choose the new owner.
