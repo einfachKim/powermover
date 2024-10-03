@@ -3,7 +3,7 @@
 ![Version](https://img.shields.io/badge/version-1.0-blue) ![License](https://img.shields.io/badge/license-MIT-green)
 
 ## Description
-**Power Mover** is a Power Platform solution designed to streamline the management of ownership transitions for Power Platform components, including canvas apps, cloud flows, connection references, and environment variables. It is ideal for handling joiner, mover, and leaver scenarios, ensuring that solutions remain operational even when the original maker is no longer involved.
+**Power Mover** is a Power Platform solution designed to streamline the management of ownership transitions for Power Platform components, including canvas apps, cloud flows, connection references, and environment variables. It is designed for handling joiner, mover, and leaver scenarios, ensuring that solutions remain operational even when the original maker is no longer involved.
 
 ### Why Use Power Mover?
 - **Batch Transfers**: Transfer multiple components with a single click.
