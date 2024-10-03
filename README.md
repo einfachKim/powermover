@@ -32,7 +32,7 @@ Power Mover includes the following key features:
 - **Ownership Transition**: Easily transfer ownership of canvas apps, cloud flows, connection references, and environment variables.
 - **Multi-Select Transfer**: Choose individual components or use the multi-select option to transfer all necessary components at once.
 - **Comprehensive Error Handling**: Built-in error handling using try/catch scopes ensures reliable and predictable component transfer.
-- **Seamless Integration**: Compatible with all standard Dataverse tables used in Power Platform solutions.
+- **Seamless Integration**: Uses only standard Dataverse tables where named components (apps, flows, connection references and environment variables) are stored.
 
 ## Solution Overview
 Below is a comprehensive table outlining the components included in the solution:
