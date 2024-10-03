@@ -99,8 +99,8 @@ For any questions, feedback, or issues, feel free to reach out:
 - **LinkedIn**: [Kim Buske on LinkedIn](https://www.linkedin.com/in/kim-buske/)
 
 ## Frequently Asked Questions (FAQ)
-- **Q: Can I transfer components to multiple owners?**  
-  A: No, the current version supports ownership transfers to one new owner
+- **Q: Can I select multiple componentes and then transfer these components to multiple owners?**  
+  A: No, the current version supports ownership transfers to one new owner for one or mulitple components.
   
 - **Q: Can I see components of multiple environments?  
   A: No, the current version only displays all components from the current environment (where the solution is installed)
