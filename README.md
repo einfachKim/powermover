@@ -68,6 +68,7 @@ To transfer a single component:
 
 
 To transfer a multiple component:
+![til](https://i.imgur.com/cx89tFD.gif))
 1. Open the **Power Mover** Canvas App.
 2. Use the checkboxes to select multiple components that you want to transfer (Canvas Apps, Cloud Flows, Connection References, Environment Variables).
 3. Use the bulk select checkbox at the left top of each table to select all components currently shown in the table
