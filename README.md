@@ -106,3 +106,6 @@ For any questions, feedback, or issues, feel free to reach out:
   
 - **Q: Can I see components of multiple environments?  
   A: No, the current version only displays all components from the current environment (where the solution is installed)
+
+  - **Q: Why can't I see all users of my organisation / all data records from the systemuser Dataverse table when selecting the new owner?
+    A: Depending on how many data records are in this table, you should adjust this dropdown and store a separate view there, which I can then use in the systemuser Dataverse table. e.g. https://www.youtube.com/watch?v=eKygMP7ySR8
