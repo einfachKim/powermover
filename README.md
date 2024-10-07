@@ -54,7 +54,7 @@ Below is a comprehensive table outlining the components included in the solution
 1. **Import the solution** in the environment where you want to manage ownerships (recommended: DEV Environment).
 2. **Activate all Cloud Flows** in the solution to ensure smooth operation.
 3. **Run the Canvas App** named `Power Mover` to start using the solution.
-4. **Recommended: Create a Dataverse View for 'systemuser' table, which is used within the Combobox for 'New Owner' and use this view in the Combobox, rather then querying the whole 'systemuser' table.
+4. **Recommended**: Create a Dataverse View for 'systemuser' table, which is used within the Combobox for 'New Owner' and use this view in the Combobox, rather then querying the whole 'systemuser' table.
 
 
 ## Usage Instructions
@@ -105,8 +105,8 @@ For any questions, feedback, or issues, feel free to reach out:
 - **Q: Can I select multiple componentes and then transfer these components to multiple owners?**  
   A: No, the current version supports ownership transfers to one new owner for one or mulitple components.
   
-- **Q: Can I see components of multiple environments?  
+- **Q: Can I see components of multiple environments?**  
   A: No, the current version only displays all components from the current environment (where the solution is installed)
 
-- **Q: Why can't I see all users of my organisation / all data records from the systemuser Dataverse table when selecting the new owner?
+- **Q: Why can't I see all users of my organisation / all data records from the systemuser Dataverse table when selecting the new owner?**
   A: Depending on how many data records are in this table, you should adjust this dropdown and store a separate view there, which I can then use in the systemuser Dataverse table. e.g. https://www.youtube.com/watch?v=eKygMP7ySR8
