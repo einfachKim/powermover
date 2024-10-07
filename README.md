@@ -54,6 +54,7 @@ Below is a comprehensive table outlining the components included in the solution
 1. **Import the solution** in the environment where you want to manage ownerships (recommended: DEV Environment).
 2. **Activate all Cloud Flows** in the solution to ensure smooth operation.
 3. **Run the Canvas App** named `Power Mover` to start using the solution.
+4. **Recommended: Create a Dataverse View for 'systemuser' table, which is used within the Combobox for 'New Owner' and use this view in the Combobox, rather then querying the whole 'systemuser' table.
 
 
 ## Usage Instructions
@@ -79,7 +80,7 @@ To transfer a multiple component:
 8. Expected Result: Owner of all components that you have selected has changed
 
 ## Demo Video
-For a detailed walkthrough of the solution and a demo of the transfer process, check out our [YouTube Demo Video](https://www.youtube.com/watch?v=YOUR_VIDEO_LINK).
+For a detailed walkthrough of the solution and a demo of the transfer process, check out our [YouTube Demo Video](https://www.youtube.com/watch?v=YTRn53FgTJI).
 
 ## Use Cases
 - **Project Deployment**:  
