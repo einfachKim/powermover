@@ -1,6 +1,6 @@
 # Power Mover
 
-![Version](https://img.shields.io/badge/version-1.0-blue) ![License](https://img.shields.io/badge/license-MIT-green)
+![Version](https://img.shields.io/badge/version-1.1-blue) ![License](https://img.shields.io/badge/license-MIT-green)
 
 ## Description
 **Power Mover** is a Power Platform solution designed to streamline the management of ownership transitions for Power Platform components, including canvas apps, cloud flows, connection references, and environment variables. It is designed for handling joiner, mover, and leaver scenarios, ensuring that solutions remain operational even when the original maker is no longer involved.
@@ -8,7 +8,7 @@
 ### Why Use Power Mover?
 - **Batch Transfers**: Transfer multiple components with a single click.
 - **Error Handling**: Built-in try/catch scopes for reliable component transfer.
-- **Flexible Scenarios**: Manage ownership transitions for both individual makers and collaborative projects.
+- **Flexible Scenarios**: Manage ownership transitions and access rights for both individual makers and collaborative projects.
 
 ## Table of Contents
 1. [Description](#description)
@@ -30,83 +30,95 @@
 Power Mover includes the following key features:
 
 - **Ownership Transition**: Easily transfer ownership of canvas apps, cloud flows, connection references, and environment variables.
+- **Share Connection References**: Share any connection reference with another user with precise access control (Read, Write, Delete, Append, AppendTo, Assign, Share).
+- **Revoke Access**: Remove access rights from individual users for any connection reference.
+- **Access Transparency**: See exactly which users have what kind of access to a specific connection reference.
 - **Multi-Select Transfer**: Choose individual components or use the multi-select option to transfer all necessary components at once.
 - **Comprehensive Error Handling**: Built-in error handling using try/catch scopes ensures reliable and predictable component transfer.
-- **Seamless Integration**: Uses only standard Dataverse tables where named components (apps, flows, connection references and environment variables) are stored.
+- **Seamless Integration**: Uses only standard Dataverse tables where named components are stored (apps, flows, connection references, environment variables).
 
 ## Solution Overview
+
 Below is a comprehensive table outlining the components included in the solution:
 
-| **Component Name**                                 | **Type**                  | **Purpose**                                                                                                         | **Connected Dataverse Tables**                        |
-|----------------------------------------------------|--------------------------|--------------------------------------------------------------------------------------------------------------------|------------------------------------------------------|
-| Power Mover                                        | Canvas App               | Central interface for transferring multiple components at once.                                                    | Users, Canvas App, Process, Connection Reference, Environment Variable Definition |
-| PowerMover \| Update Canvas App Owner              | Cloud Flow (Instant)     | Handles the ownership transfer of canvas apps with error handling.                                                 | Canvas App                                           |
-| PowerMover \| Update Connection Reference Owner    | Cloud Flow (Instant)     | Manages ownership transition for connection referencewith error handling.                                          | Connection Reference                                 |
-| PowerMover \| Update Environment Variable Owner    | Cloud Flow (Instant)     | Updates ownership of environment variables with error handling.                                                    | Environment Variable Definition                      |
-| PowerMover \| Update Flow Owner                    | Cloud Flow (Instant)     | Transfers ownership of Cloud Flows with error handling.                                                            | Process (Flow)                                       |
-| Power Mover \| Bulk Operation Spread Components    | Cloud Flow (Instant)     | Serves as parent flow for the bulk transfer and receives the collection ‘colTransferComponents’ as JSON and triggers the child flow above depending on the component type.                              | No direct connection. Triggers child flows.                                  |
+| **Component Name**                                              | **Type**               | **Purpose**                                                                                                                      | **Connected Dataverse Tables**                                     |
+|------------------------------------------------------------------|------------------------|----------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------|
+| PowerMover - Manage Ownerships                                   | Canvas App             | Central UI for managing ownership and access for all supported component types                                                  | Users, Canvas App, Process, Connection Reference, Environment Variable Definition |
+| PowerMover \| List People with Access to Connection Reference    | Cloud Flow (Instant)   | Lists all users who have access to a given connection reference including access rights                                         | principalobjectaccess, systemuser                                  |
+| PowerMover \| Share Connection Reference with a Person           | Cloud Flow (Instant)   | Shares a connection reference with a specific user and defined access level                                                     | connectionreference                                                 |
+| PowerMover \| Revoke Access to Connection Reference for a Person | Cloud Flow (Instant)   | Revokes all access for a user from a specific connection reference                                                              | principalobjectaccess                                               |
+| PowerMover \| Update Canvas App Owner                            | Cloud Flow (Instant)   | Transfers ownership of a Canvas App                                                                                             | canvasapp                                                           |
+| PowerMover \| Update Connection Reference Owner                  | Cloud Flow (Instant)   | Transfers ownership of a Connection Reference                                                                                   | connectionreference                                                 |
+| PowerMover \| Update Environment Variable Definition Owner       | Cloud Flow (Instant)   | Transfers ownership of an Environment Variable                                                                                  | environmentvariabledefinition                                       |
+| PowerMover \| Update Flow Owner                                  | Cloud Flow (Instant)   | Transfers ownership of a Cloud Flow                                                                                              | workflow / process                                                  |
 
 ## Prerequisites
 - **Power Apps Premium License**: Required to use this solution since it involves accessing different Dataverse tables.
-- **Owner Permissions**: The user using the apps needs to own components he wants to transfer or must be at least system customizer or system administrator to transfer components owned by other users.
+- **Owner Permissions**: The user using the apps needs to own components they want to transfer or must be at least a system customizer or system administrator to transfer components owned by other users.
 
 ## Installation Guide
 1. **Import the solution** in the environment where you want to manage ownerships (recommended: DEV Environment).
 2. **Activate all Cloud Flows** in the solution to ensure smooth operation.
 3. **Run the Canvas App** named `Power Mover` to start using the solution.
-4. **Recommended**: Create a Dataverse View for 'systemuser' table, which is used within the Combobox for 'New Owner' and use this view in the Combobox, rather then querying the whole 'systemuser' table.
+4. **Recommended**: Create a Dataverse View for the `systemuser` table, which is used within the Combobox for 'New Owner', and use this view in the Combobox rather than querying the entire table.
 
+## Configuration Details
+No additional configuration required. Make sure all flows have correct connections configured after import.
 
 ## Usage Instructions
-To transfer a single component:
+
+### To transfer a single component:
 ![til](https://i.imgur.com/A7iwJcP.gif)
 1. Open the **Power Mover** Canvas App.
-2. Select the component you want to transfer using the pen-icon (Canvas Apps, Cloud Flows, Connection References, Environment Variables).
+2. Select the component you want to transfer using the pen-icon.
 3. Click on the "Transfer" button and choose the new owner.
-4. For Power Apps Canvas Apps: Select if the current owner shall be co-owner after the transfer
-5. Monitor the status of the selected component in the app interface.
-6. Expected Result: Owner of the component has changed
+4. For Canvas Apps: Select if the current owner shall remain co-owner.
+5. Monitor the status in the app interface.
 
-
-To transfer a multiple component:
-![til](https://i.imgur.com/cx89tFD.gif))
+### To transfer multiple components:
+![til](https://i.imgur.com/cx89tFD.gif)
 1. Open the **Power Mover** Canvas App.
-2. Use the checkboxes to select multiple components that you want to transfer (Canvas Apps, Cloud Flows, Connection References, Environment Variables).
-3. Use the bulk select checkbox at the left top of each table to select all components currently shown in the table
-4. At the bottom of the table you can empty the basket with components, see the total items count of components or click "Transfer Components" to move on transferring all selected components.
-5. For Power Apps Canvas Apps: Select if the current owner shall be co-owner after the transfer
-6. Click on the "Transfer" button and choose the new owner.
-7. Monitor the status of each transfer using the app interface.
-8. Expected Result: Owner of all components that you have selected has changed
+2. Use the checkboxes to select multiple components.
+3. Use the bulk checkbox to select all visible items.
+4. At the bottom, click "Transfer Components" to proceed.
+5. Choose the new owner and confirm.
+6. Monitor the progress in the UI.
 
 ## Demo Video
-For a detailed walkthrough of the solution and a demo of the transfer process, check out our [YouTube Demo Video](https://www.youtube.com/watch?v=YTRn53FgTJI).
+Check out our [YouTube Demo Video](https://www.youtube.com/watch?v=YTRn53FgTJI) for a walkthrough.
 
 ## Use Cases
-- **Project Deployment**:  
-  Several makers work together on a solution. For the transition to the TEST and PROD environment, the solution should be transferred to one of the makers or a service account in the DEV environment. This ensures that a single owner is designated for future maintenance and deployment activities.
-  
-- **Maker Offboarding**:  
-  A maker leaves the company and is the owner of a solution in the DEV environment (TEST and PROD are owned by the service principal). The solution must be transferred to a colleague who will own the solution in the future, ensuring no disruptions in ownership and operation.
-  
-- **Maker Moves to Another Department**:  
-  A maker is transferred to another department and is no longer involved in the development of certain solutions. To reflect the organizational change, the ownership of all solutions they developed is transitioned to a colleague within the same team or to a new owner in the current department.
+
+- **Project Deployment**: Transfer ownership during stage transitions (e.g. from DEV to TEST).
+- **Maker Offboarding**: Reassign ownership when a maker leaves the company.
+- **Internal Role Change**: Adjust ownership when a maker moves to a new department.
 
 ## Version History / Changelog
-- **03.10.24** - Release of the first version to transfer apps, flows, connection references, and environment variables.
+
+- **24.05.25** – Major feature update:
+  - Introduced the ability to share connection references with specific users and multiple access levels.
+  - Added flows to revoke access and to list users with current access on a reference.
+- **03.10.24** – Initial release with ownership transfer for apps, flows, connection references, and environment variables.
 
 ## Contact Information
-For any questions, feedback, or issues, feel free to reach out:
+For any questions or feedback:
 
 - **Email**: [kim@ema-sh.de](mailto:kim@ema-sh.de)
 - **LinkedIn**: [Kim Buske on LinkedIn](https://www.linkedin.com/in/kim-buske/)
 
-## Frequently Asked Questions (FAQ)
-- **Q: Can I select multiple componentes and then transfer these components to multiple owners?**  
-  A: No, the current version supports ownership transfers to one new owner for one or mulitple components.
-  
-- **Q: Can I see components of multiple environments?**  
-  A: No, the current version only displays all components from the current environment (where the solution is installed)
+## License
+MIT
 
-- **Q: Why can't I see all users of my organisation / all data records from the systemuser Dataverse table when selecting the new owner?**
-  A: Depending on how many data records are in this table, you should adjust this dropdown and store a separate view there, which I can then use in the systemuser Dataverse table. e.g. https://www.youtube.com/watch?v=eKygMP7ySR8
+## Contributing
+Pull requests welcome. For larger changes, please open an issue first.
+
+## Frequently Asked Questions (FAQ)
+
+- **Q: Can I transfer components to multiple new owners?**  
+  A: No, one transfer action supports assigning a single new owner at a time.
+
+- **Q: Can I view components from multiple environments?**  
+  A: No, only components from the current environment are shown.
+
+- **Q: Why are not all users visible in the 'New Owner' dropdown?**  
+  A: Use a filtered view of the `systemuser` table to improve performance. [Video explanation](https://www.youtube.com/watch?v=eKygMP7ySR8)
